@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Massively by HTML5 UP</title>
+		<title>Blood Certificate</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -36,7 +36,7 @@
 
 				<!-- Intro -->
 					<div id="intro">
-						<h1>'호진'의 혈액증서<br />
+						<h1>'호진'님의 혈액증서<br />
 						입니다.</h1>
 						<p>블록체인 토큰으로 새롭게 개편된 헌혈 증서 시스템 ! <br/>
 						언제든지 쉽고 빠르게 조회하세요 !</p>
@@ -84,120 +84,230 @@
 							</article>
 						-->
 						<!-- Posts -->
-							<section id="certs" class="posts">
-								<script>
-								/*
-								<article>
+							<section id="parseresult" class="posts">
+														
+							
+	<script src="https://cdn.ethers.io/scripts/ethers-v4.min.js" charset="utf-8" type="text/javascript"></script>
+  	<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>						
+	
+	
+    <script>
+        web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io"));
+        var contract = web3.eth.contract([{
+                "constant": false,
+                "inputs": [{
+                        "name": "_from",
+                        "type": "address"
+                    },
+                    {
+                        "name": "_to",
+                        "type": "address"
+                    },
+                    {
+                        "name": "_tokenId",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "transferFrom",
+                "outputs": [],
+                "payable": false,
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "constant": true,
+                "inputs": [{
+                    "name": "",
+                    "type": "address"
+                }],
+                "name": "ownerCertCount",
+                "outputs": [{
+                    "name": "",
+                    "type": "uint256"
+                }],
+                "payable": false,
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "constant": false,
+                "inputs": [{
+                        "name": "name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "certType",
+                        "type": "string"
+                    },
+                    {
+                        "name": "time",
+                        "type": "uint256"
+                    },
+                    {
+                        "name": "gender",
+                        "type": "uint8"
+                    },
+                    {
+                        "name": "bloodType",
+                        "type": "uint8"
+                    }
+                ],
+                "name": "registerCard",
+                "outputs": [],
+                "payable": false,
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "constant": true,
+                "inputs": [{
+                    "name": "_tokenId",
+                    "type": "uint256"
+                }],
+                "name": "ownerOf",
+                "outputs": [{
+                    "name": "owner",
+                    "type": "address"
+                }],
+                "payable": false,
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "constant": true,
+                "inputs": [{
+                    "name": "",
+                    "type": "uint256"
+                }],
+                "name": "certOwnerMapping",
+                "outputs": [{
+                    "name": "",
+                    "type": "address"
+                }],
+                "payable": false,
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "constant": true,
+                "inputs": [{
+                    "name": "_owner",
+                    "type": "address"
+                }],
+                "name": "balanceOf",
+                "outputs": [{
+                    "name": "balance",
+                    "type": "uint256"
+                }],
+                "payable": false,
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "constant": false,
+                "inputs": [{
+                        "name": "_to",
+                        "type": "address"
+                    },
+                    {
+                        "name": "_tokenId",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "transfer",
+                "outputs": [],
+                "payable": false,
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "constant": true,
+                "inputs": [{
+                    "name": "_owner",
+                    "type": "address"
+                }],
+                "name": "getUserCard",
+                "outputs": [{
+                    "name": "",
+                    "type": "uint256[]"
+                }],
+                "payable": false,
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "anonymous": false,
+                "inputs": [{
+                        "indexed": true,
+                        "name": "_from",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": true,
+                        "name": "_to",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": true,
+                        "name": "_tokenId",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "Transfer",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [{
+                        "indexed": false,
+                        "name": "owner",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "name": "id",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "CreateCert",
+                "type": "event"
+            }
+        ]).at("0xa1Eb185D6De5Eb4FA43a4A52a7AFfF1c3E7D6556");
+        web3.eth.defaultAccount = web3.eth.accounts[0];
+
+        var userAccount = "0x2621e1dab1dcd6669522d3fe688322372d78b2ef";
+		
+        console.log(userAccount);
+        var accountInterval = setInterval(function () {
+            $("#parseresult").empty();
+            // Check if account has changed
+            //alert("called!");
+
+            // Call a function to update the UI with the new account
+            var usercard = contract.getUserCard(userAccount);
+            for (time of usercard) {
+                $("#parseresult").append(
+								`<article>
 									<header>
-										<span class="date">April 24, 2017</span>
-										<h2><a href="#">Sed magna<br />
-										ipsum faucibus</a></h2>
+										<h2><a href="#">${time.valueOf()}월에 받은 헌혈증서 입니다!<br/></a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
-								</article>
-								*/
-								</script>
-								
-								<article>
-									<header>
-										<span class="date">October 27th, 2018</span>
-										<h2><a href="#">증서<br />
-										#1</a></h2>
-									</header>
+									
 									<a href="#" class="image fit"><img src="images/bloodcard01.jpg" alt="" /></a>
 									<h4>
-									<p>10월에 헌혈해 주셔서 감사합니다!</p>
+									<p>헌혈해 주셔서 감사합니다! ^^</p>
 									</h4>
-									<a class="cutton cutton2">사용 가능</a>
-									<a class="cutton">사용 불가</a>
-								</article>
+									<a class="cutton">사용 가능</a>
+									
+								</article>`
+                );
+            };
+        }, 3000);
+		<!-- a class="cutton cutton2">사용 불가</a -->
 								
-								
-			<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
-			<script src="assets/js/linkWeb3.js"></script>
-								
+    </script>
+									
 								<!-- adding json parser-->
-								<script>
-								/*
-								//var section = document.querySelector();
-								var	mainID = document.getElementById("main");
-								//var sectionPost = document.getElementById("posts");
-								//var sectionPost2 = mainID.getElementsByClassName("posts");
-								var sectionPost3 = mainID.getElementsByTagName("section");
-								//alert(sectionPost3);
-								var sectionPost4 = document.getElementById("main").getElementsByTagName("section");
-								var sectionPost5 = document.getElementById("main");
-								*/
-								var sectionPost6 = document.getElementById("certs");
 								
-								var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
-								var request = new XMLHttpRequest();
-								request.open('GET', requestURL);
-								request.responseType = 'json';
-								request.send();
-	
-								request.onload = function(){
-								var result = request.response;
-									//populateHeader(result);
-									showData(result);
-								}
-								
-								function showData(jsonObj){
-									var data = jsonObj['members'];
-									for(var i=0;i<data.length;i++){
-										var myArticle = document.createElement('article');
-										var myH2 = document.createElement('h2');
-										var myPara1 = document.createElement('p');
-										var myImage = document.createElement('img');
-										var myA = document.createElement('a');
-										var myButton = document.createElement('a');
-																			//<a class="cutton">사용 불가</a>
-										
-										myH2.textContent = data[i].name;
-										myPara1.textContent = 'Secret identity: ' + data[i].secretIdentity;
-										
-										myImage.setAttribute('src','images/bloodcard01.jpg');
-										
-										//<a href="#" class="image fit">
-										myA.setAttribute('class',"image fit");
-										
-										myArticle.appendChild(myH2);
-										myArticle.appendChild(myPara1);
-										
-										myA.appendChild(myImage);
-										myArticle.appendChild(myA);
-										//myArticle.appendChild(myImage);
-										//myArticle.appendChild(myA);
-										
-										myButton.setAttribute('class',"cutton");
-										myButton.textContent = '사용 가능';
-										myArticle.appendChild(myButton);
-										
-										sectionPost6.appendChild(myArticle);
-										
-										//sectionPost3.appendChild(myArticle);
-										//mainID.appendChild(myArticle); 됨
-									}
-								}
-								
-								<!-- read dateOf-->
-								//alert(Bcert.dateOf('0x8bfc14cd62da7bad4352c08bf0f487e77f7042f8'));
-								
-								Bcert.dateOf('0x8bfc14cd62da7bad4352c08bf0f487e77f7042f8',function(error,result){
-									if(!error)
-									{
-									//	alert("result: "+result);
-										//if value is result, result[1]
-									}
-									else
-										console.error(error);
-								});
-								
-								</script>
 								<!-- -->
 								
 								<!--
@@ -358,3 +468,75 @@
 
 	</body>
 </html>
+
+<!-- scripts 
+<script>
+								/*
+								//var section = document.querySelector();
+								var	mainID = document.getElementById("main");
+								//var sectionPost = document.getElementById("posts");
+								//var sectionPost2 = mainID.getElementsByClassName("posts");
+								var sectionPost3 = mainID.getElementsByTagName("section");
+								//alert(sectionPost3);
+								var sectionPost4 = document.getElementById("main").getElementsByTagName("section");
+								var sectionPost5 = document.getElementById("main");
+								*/
+								var sectionPost6 = document.getElementById("certs");
+								
+								var requestURL = 'https://raw.githubusercontent.com/2013250433/blockcamp_hackathon/master/assets/json/blood_cert2.json';
+								var requestURL2 = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+								var request = new XMLHttpRequest();
+								request.open('GET', requestURL);
+								request.responseType = 'json';
+								request.send();
+	
+								request.onload = function(){
+								var result = request.response;
+									//populateHeader(result);
+									//showData(result);
+									//shortData(result);
+								}
+								
+								function showData(jsonObj){
+									var data = jsonObj['members'];
+									for(var i=0;i<data.length;i++){
+										var myArticle = document.createElement('article');
+										var myH2 = document.createElement('h2');
+										var myPara1 = document.createElement('p');
+										var myImage = document.createElement('img');
+										var myA = document.createElement('a');
+										var myButton = document.createElement('a');
+																			//<a class="cutton">사용 불가</a>
+										
+										myH2.textContent = data[i].name;
+										myPara1.textContent = 'Secret identity: ' + data[i].secretIdentity;
+										
+										myImage.setAttribute('src','images/bloodcard01.jpg');
+										
+										//<a href="#" class="image fit">
+										myA.setAttribute('class',"image fit");
+										
+										myArticle.appendChild(myH2);
+										myArticle.appendChild(myPara1);
+										
+										myA.appendChild(myImage);
+										myArticle.appendChild(myA);
+										//myArticle.appendChild(myImage);
+										//myArticle.appendChild(myA);
+										
+										myButton.setAttribute('class',"cutton");
+										myButton.textContent = '사용 가능';
+										myArticle.appendChild(myButton);
+										
+										sectionPost6.appendChild(myArticle);
+										
+										//sectionPost3.appendChild(myArticle);
+										//mainID.appendChild(myArticle); 됨
+									}
+								}
+								
+								
+								//alert(Bcert.dateOf('0x8bfc14cd62da7bad4352c08bf0f487e77f7042f8'));
+								
+								</script>
+-->
