@@ -67,7 +67,7 @@
 								</ul>
 							</article>
 						<!-- Posts -->
-							<section class="posts">
+							<section id="certs" class="posts">
 								<article>
 									<header>
 										<span class="date">April 24, 2017</span>
@@ -92,6 +92,70 @@
 										<li><a href="#" class="button">사용 가능</a></li>
 									</ul>
 								</article>
+								
+								<!-- adding json parser-->
+								<script>
+								/*
+								//var section = document.querySelector();
+								var	mainID = document.getElementById("main");
+								//var sectionPost = document.getElementById("posts");
+								//var sectionPost2 = mainID.getElementsByClassName("posts");
+								var sectionPost3 = mainID.getElementsByTagName("section");
+								//alert(sectionPost3);
+								var sectionPost4 = document.getElementById("main").getElementsByTagName("section");
+								var sectionPost5 = document.getElementById("main");
+								*/
+								
+								var sectionPost6 = document.getElementById("certs");
+								
+								var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+								var request = new XMLHttpRequest();
+								request.open('GET', requestURL);
+								request.responseType = 'json';
+								request.send();
+	
+								request.onload = function(){
+								var result = request.response;
+									//populateHeader(result);
+									showData(result);
+								}
+								
+								function showData(jsonObj){
+									var data = jsonObj['members'];
+									for(var i=0;i<data.length;i++){
+										var myArticle = document.createElement('article');
+										var myH2 = document.createElement('h2');
+										var myPara1 = document.createElement('p');
+										var myImage = document.createElement('img');
+										var myA = document.createElement('a');
+										
+										myH2.textContent = data[i].name;
+										myPara1.textContent = 'Secret identity: ' + data[i].secretIdentity;
+										
+										myImage.setAttribute('src','images/bloodcard01.jpg');
+										
+										//<a href="#" class="image fit">
+										myA.setAttribute('class',"image fit");
+										
+										myArticle.appendChild(myH2);
+										myArticle.appendChild(myPara1);
+										
+										myA.appendChild(myImage);
+										myArticle.appendChild(myA);
+										//myArticle.appendChild(myImage);
+										//myArticle.appendChild(myA);
+										
+										sectionPost6.appendChild(myArticle);
+										
+										//sectionPost3.appendChild(myArticle);
+										//mainID.appendChild(myArticle); 됨
+									}
+								}
+								
+								</script>
+								<!-- -->
+								
+								
 								<article>
 									<header>
 										<span class="date">April 22, 2017</span>
