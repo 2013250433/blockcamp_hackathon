@@ -11,6 +11,22 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			.cutton {
+			background-color: #4CAF50; /* Green */
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;}
+			 .cutton2 {background-color: #f44336;} /* Red */
+			 
+		</style>
+		
 		
 	</head>
 	<body class="is-preload">
@@ -20,10 +36,10 @@
 
 				<!-- Intro -->
 					<div id="intro">
-						<h1>혈액 증서<br />
+						<h1>'호진'의 혈액증서<br />
 						입니다.</h1>
-						<p>A free, fully responsive HTML5 + CSS3 site template designed by <a href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a><br />
-						and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>.</p>
+						<p>블록체인 토큰으로 새롭게 개편된 헌혈 증서 시스템 ! <br/>
+						언제든지 쉽고 빠르게 조회하세요 !</p>
 						<ul class="actions">
 							<li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
 						</ul>
@@ -31,15 +47,14 @@
 
 				<!-- Header -->
 					<header id="header">
-						<a href="index.html" class="logo">Massively</a>
+						<a href="index.html" class="logo">'호진'의 혈액증서 입니다.</a>
 					</header>
 
 				<!-- Nav -->
 					<nav id="nav">
 						<ul class="links">
-							<li class="active"><a href="index.html">This is Massively</a></li>
-							<li><a href="generic.html">Generic Page</a></li>
-							<li><a href="elements.html">Elements Reference</a></li>
+							<li class="active"><a href="index.html">나의 헌혈 증서</a></li>
+							<li><a href="generic.html">헌혈 증서 기부하기</a></li>
 						</ul>
 						<ul class="icons">
 							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
@@ -52,7 +67,7 @@
 				<!-- Main -->
 					<div id="main">
 
-						<!-- Featured Post -->
+						<!-- Featured Post 
 							<article class="post featured">
 								<header class="major">
 									<span class="date">April 25, 2017</span>
@@ -67,8 +82,11 @@
 									<li><a href="#" class="button large">Full Story</a></li>
 								</ul>
 							</article>
+						-->
 						<!-- Posts -->
 							<section id="certs" class="posts">
+								<script>
+								/*
 								<article>
 									<header>
 										<span class="date">April 24, 2017</span>
@@ -81,6 +99,9 @@
 										<li><a href="#" class="button">Full Story</a></li>
 									</ul>
 								</article>
+								*/
+								</script>
+								
 								<article>
 									<header>
 										<span class="date">October 27th, 2018</span>
@@ -88,113 +109,16 @@
 										#1</a></h2>
 									</header>
 									<a href="#" class="image fit"><img src="images/bloodcard01.jpg" alt="" /></a>
-									<p>10월달에 헌혈해 주셔서 감사합다.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">사용 가능</a></li>
-									</ul>
+									<h4>
+									<p>10월에 헌혈해 주셔서 감사합니다!</p>
+									</h4>
+									<a class="cutton cutton2">사용 가능</a>
+									<a class="cutton">사용 불가</a>
 								</article>
 								
 								
 			<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
-								<script>
-			
-			if(typeof web3!='undefined'){
-			web3 = new Web3(web3.currentProvider);
-			} else {
-			
-			web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io'));
-			}
-			
-			web3.eth.defaultAccount = web3.eth.accounts[0];
-			var bcertContract = web3.eth.contract(
-			[
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_owner",
-				"type": "address"
-			},
-			{
-				"name": "_date",
-				"type": "uint256"
-			},
-			{
-				"name": "_btype",
-				"type": "string"
-			}
-		],
-		"name": "createCert",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "b_type",
-		"outputs": [
-			{
-				"name": "",
-				"type": "string"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_owner",
-				"type": "address"
-			}
-		],
-		"name": "dateOf",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "x_date",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	}
-]
-			); //ends ABI
-			
-			var Bcert = bcertContract.at('0xa70b669EAAD9a3869cfc8B29C694be3dC0F5dD39');
-			console.log(Bcert);
-			
-			
-		</script>
+			<script src="assets/js/linkWeb3.js"></script>
 								
 								<!-- adding json parser-->
 								<script>
@@ -230,6 +154,8 @@
 										var myPara1 = document.createElement('p');
 										var myImage = document.createElement('img');
 										var myA = document.createElement('a');
+										var myButton = document.createElement('a');
+																			//<a class="cutton">사용 불가</a>
 										
 										myH2.textContent = data[i].name;
 										myPara1.textContent = 'Secret identity: ' + data[i].secretIdentity;
@@ -247,6 +173,10 @@
 										//myArticle.appendChild(myImage);
 										//myArticle.appendChild(myA);
 										
+										myButton.setAttribute('class',"cutton");
+										myButton.textContent = '사용 가능';
+										myArticle.appendChild(myButton);
+										
 										sectionPost6.appendChild(myArticle);
 										
 										//sectionPost3.appendChild(myArticle);
@@ -254,12 +184,13 @@
 									}
 								}
 								
-								alert(Bcert.dateOf('0x8bfc14cd62da7bad4352c08bf0f487e77f7042f8'));
+								<!-- read dateOf-->
+								//alert(Bcert.dateOf('0x8bfc14cd62da7bad4352c08bf0f487e77f7042f8'));
 								
 								Bcert.dateOf('0x8bfc14cd62da7bad4352c08bf0f487e77f7042f8',function(error,result){
 									if(!error)
 									{
-										alert("result: "+result);
+									//	alert("result: "+result);
 										//if value is result, result[1]
 									}
 									else
@@ -335,7 +266,9 @@
 							
 							
 						<!-- Footer -->
-							<footer>
+						<script>
+						/*
+								<footer>
 								<div class="pagination">
 									<!--<a href="#" class="previous">Prev</a>-->
 									<a href="#" class="page active">1</a>
@@ -348,6 +281,11 @@
 									<a href="#" class="next">Next</a>
 								</div>
 							</footer>
+						*/
+						</script>
+						
+						
+						
 
 
 					</div>
