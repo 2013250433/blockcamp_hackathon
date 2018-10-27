@@ -11,6 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		
 	</head>
 	<body class="is-preload">
 
@@ -93,6 +94,108 @@
 									</ul>
 								</article>
 								
+								
+			<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+								<script>
+			
+			if(typeof web3!='undefined'){
+			web3 = new Web3(web3.currentProvider);
+			} else {
+			
+			web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io'));
+			}
+			
+			web3.eth.defaultAccount = web3.eth.accounts[0];
+			var bcertContract = web3.eth.contract(
+			[
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"name": "_date",
+				"type": "uint256"
+			},
+			{
+				"name": "_btype",
+				"type": "string"
+			}
+		],
+		"name": "createCert",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "b_type",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "dateOf",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "x_date",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+			); //ends ABI
+			
+			var Bcert = bcertContract.at('0xa70b669EAAD9a3869cfc8B29C694be3dC0F5dD39');
+			console.log(Bcert);
+			
+			
+		</script>
+								
 								<!-- adding json parser-->
 								<script>
 								/*
@@ -105,7 +208,6 @@
 								var sectionPost4 = document.getElementById("main").getElementsByTagName("section");
 								var sectionPost5 = document.getElementById("main");
 								*/
-								
 								var sectionPost6 = document.getElementById("certs");
 								
 								var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
@@ -152,10 +254,22 @@
 									}
 								}
 								
+								alert(Bcert.dateOf('0x8bfc14cd62da7bad4352c08bf0f487e77f7042f8'));
+								
+								Bcert.dateOf('0x8bfc14cd62da7bad4352c08bf0f487e77f7042f8',function(error,result){
+									if(!error)
+									{
+										alert("result: "+result);
+										//if value is result, result[1]
+									}
+									else
+										console.error(error);
+								});
+								
 								</script>
 								<!-- -->
 								
-								
+								<!--
 								<article>
 									<header>
 										<span class="date">April 22, 2017</span>
@@ -216,8 +330,10 @@
 										<li><a href="#" class="button">Full Story</a></li>
 									</ul>
 								</article>
+								-->
 							</section>
-
+							
+							
 						<!-- Footer -->
 							<footer>
 								<div class="pagination">
@@ -232,6 +348,7 @@
 									<a href="#" class="next">Next</a>
 								</div>
 							</footer>
+
 
 					</div>
 
@@ -299,6 +416,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
 	</body>
 </html>
